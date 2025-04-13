@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Último Ano</title></head>
+<body>
+  <div id="ultimo_ano"></div>
+
+  <script>
+    fetch("livros.xml")
+      .then(res => res.text())
+      .then(str => new DOMParser().parseFromString(str, "text/xml"))
+      .then(data => {
+        const livros = data.getElementsByTagName("livro");
+        const ultimo = livros[livros.length - 1];
+        const ano = ultimo.getElementsByTagName("ano")[0].firstChild.nodeValue;
+        document.getElementById("ultimo_ano").textContent = ano;
+      });
+  </script>
+</body>
+</html>

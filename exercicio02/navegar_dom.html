@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Navegar pelo DOM</title></head>
+<body>
+  <div id="navegacao"></div>
+
+  <script>
+    fetch("livros.xml")
+      .then(res => res.text())
+      .then(str => new DOMParser().parseFromString(str, "text/xml"))
+      .then(data => {
+        const autor = data.getElementsByTagName("autor")[1]; // segundo livro
+        const livro = autor.parentNode;
+        const titulo = livro.getElementsByTagName("titulo")[0].textContent;
+        document.getElementById("navegacao").textContent = titulo;
+      });
+  </script>
+</body>
+</html>
